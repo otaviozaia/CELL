@@ -245,6 +245,8 @@ def getFrequenceRa():
 
     return jsonify(dados)
 
+    #return render_template('frequence.html',dados=dados)
+
 
 
 

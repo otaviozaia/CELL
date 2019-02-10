@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--PARA CADA "DIA" NA LISTA DADOS-->
+    {% for row in dados %}
+        <!--TRAZ AS CHAVES E OS VALORES DAQUELE DIA-->
+        {% for key,value in row.items() %}
+
+        <!--CHAVE        VALOR-->      
+        {{ key }}    :    {{ value }} <hr>
+
+
+        {% endfor %}
+
+    {% endfor %}
+
+    <!--
+        ESTRUTURA MANIPULADA ACIMA (CONJUNTO DE FREQUENCIAS DIÁRIAS DE UM ALUNO):
+    [{"_id":7,
+    "date":"10/2/2019",
+    "entrada":8.01,
+    "name":"CAMILLE GONÇALVES PERES",
+    "p1":1,
+    "p10":0,
+    "p2":0,
+    "p3":0,
+    "p4":0,
+    "p5":0,
+    "p6":0,
+    "p7":0,
+    "p8":0,
+    "p9":0,
+    "ra":"3958",
+    "saida":15.06,
+    "total":1,
+    "weekday":"Terça-feira"},
+    
+    {"_id":42,
+    "date":"10/2/2019",
+    "entrada":9.01,
+    "name":"CAMILLE GONÇALVES PERES",
+    "p1":1,
+    "p10":1,
+    "p2":1,
+    "p3":0,
+    "p4":0,
+    "p5":0,
+    "p6":0,
+    "p7":0,
+    "p8":0,
+    "p9":1,
+    "ra":"3958",
+    "saida":14.06,
+    "total":4,
+    "weekday":"Quarta-feira"}]
+    -->
+
+
+
+
+</body>
+</html>
