@@ -243,9 +243,8 @@ def getFrequenceRa():
 
     dados = getFrequenceDaily_Student(ra)
 
-    return jsonify(dados)
 
-    #return render_template('frequence.html',dados=dados)
+    return render_template('frequence.html',dados=dados)
 
 
 
