@@ -226,7 +226,34 @@ class daily_frequence(db.Model):
 
 
 
+#repositório geral, guardará faltas de alunos contendo ra, disciplina da falta e data (data para posteriormente
+# filtrarmos por períodos (trimestre, ano letivo e etc))
+class Ausences(db.Model):
+    __tablename__='Ausences'
+    _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    ra = db.Column(db.String(20))
+    discipline = db.Column(db.String(100))
+    date = db.Column(db.Date)
 
+    def __init__(self, ra, discipline, date):
+        self.ra = ra
+        self.discipline = discipline
+        self.date = date
+
+
+
+#disciplinas cadastradas por ano
+class Disciplines(db.Model):
+    __tablename__='Disciplines'
+    _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(100))
+    description = db.Column(db.String(500))
+    groupYear = db.Column(db.Integer)
+
+    def __init__(self, name, description, groupYear):
+        self.name = name
+        self.description = description
+        self.groupYear = groupYear
 
 
 

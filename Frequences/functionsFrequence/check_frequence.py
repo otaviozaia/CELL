@@ -2,7 +2,7 @@
 
 
 from app import db
-from ModelsDB.tables import daily_frequence,Grades,Student
+from ModelsDB.tables import daily_frequence,Grades,Student,Ausences
 from flask_sqlalchemy import SQLAlchemy
 from Frequences.functionsFrequence.alunos import returnAll,returnRa
 from flask import jsonify
@@ -120,6 +120,166 @@ def checkFrequence(datas):
                 freq.total = total
 
                 db.session.add(freq)
+
+
+                #o código abaixo verificará se há faltas nos períodos, se houver, 
+                #a falta será registrada na tabela Ausences com ra, matéria e data
+                if p1 == 1:
+    
+                    ra = ra
+                    discipline = grade.p1materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+                if p2 == 1:
+    
+                    ra = ra
+                    discipline = grade.p2materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+                if p3 == 1:
+    
+                    ra = ra
+                    discipline = grade.p3materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p4 == 1:
+    
+                    ra = ra
+                    discipline = grade.p4materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+                
+                if p5 == 1:
+    
+                    ra = ra
+                    discipline = grade.p5materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p6 == 1:
+    
+                    ra = ra
+                    discipline = grade.p6materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p7 == 1:
+    
+                    ra = ra
+                    discipline = grade.p7materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p8 == 1:
+    
+                    ra = ra
+                    discipline = grade.p8materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p9 == 1:
+    
+                    ra = ra
+                    discipline = grade.p9materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p10 == 1:
+    
+                    ra = ra
+                    discipline = grade.p10materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
 
 
         #se o aluno estiver presente:
@@ -274,6 +434,166 @@ def checkFrequence(datas):
                 freq.total = total
 
                 db.session.add(freq)
+
+                #o código abaixo verificará se há faltas nos períodos, se houver, 
+                #a falta será registrada na tabela Ausences com ra, matéria e data
+                if p1 == 1:
+
+                    ra = ra
+                    discipline = grade.p1materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+                if p2 == 1:
+    
+                    ra = ra
+                    discipline = grade.p2materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+                if p3 == 1:
+    
+                    ra = ra
+                    discipline = grade.p3materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p4 == 1:
+    
+                    ra = ra
+                    discipline = grade.p4materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+                
+                if p5 == 1:
+    
+                    ra = ra
+                    discipline = grade.p5materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p6 == 1:
+    
+                    ra = ra
+                    discipline = grade.p6materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p7 == 1:
+    
+                    ra = ra
+                    discipline = grade.p7materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p8 == 1:
+    
+                    ra = ra
+                    discipline = grade.p8materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p9 == 1:
+    
+                    ra = ra
+                    discipline = grade.p9materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
+
+                if p10 == 1:
+    
+                    ra = ra
+                    discipline = grade.p10materia
+                    date = date
+
+
+                    ausence = Ausences(ra,discipline,date)
+
+                    ausence.ra = ra
+                    ausence.discipline = discipline
+                    ausence.date = date
+
+                    db.session.add(ausence)
+
 
         #comitamos tudo que foi adicionado para o banco
         db.session.commit()

@@ -14,6 +14,10 @@ from Frequences.functionsFrequence.grades import*
 from Frequences.functionsFrequence.check_frequence import*
 #importa funções que retornam presenças dos alunos
 from Frequences.functionsFrequence.return_frequence import*
+#importa funções CRUD para disciplinas
+from Frequences.functionsFrequence.crud_disciplines import*
+#importa funções de frequencia
+from Frequences.functionsFrequence.frequenceDiscipline import*
 
 
 #------------------------------------------------ALUNOS-------------------------------------------------------------
@@ -241,10 +245,60 @@ def getFrequenceRa():
 
     ra = request.args.get("ra")
 
+    aluno = returnRa(ra)
+
+    year = aluno.year
+
     dados = getFrequenceDaily_Student(ra)
 
 
-    return render_template('frequence.html',dados=dados)
+    dadosDisciplina = getDisciplinesAusences(ra,year)
+
+
+    return render_template('frequence.html',dados=dados,dadosDisciplina=dadosDisciplina)
+
+
+
+#rota para criação de disciplinas
+@app.route('/disciplines/create',methods=['POST'])
+def disciplineCreate():
+
+    dados = request.get_json()
+
+
+    #json sample:
+    '''
+    [
+
+        {'name':'TEP',
+        'description':'TESTE',
+         'groupYear':5},
+         {'name':'Geografia',
+        'description':'TESTE',
+         'groupYear':5},
+         {'name':'Língua Portuguesa',
+        'description':'TESTE',
+         'groupYear':5},
+         {'name':'Língua Inglesa',
+        'description':'TESTE',
+         'groupYear':5},
+         {'name':'Educação Física',
+        'description':'TESTE',
+         'groupYear':5}, 
+         {'name':'TEP Duplo Fixo',
+        'description':'TESTE',
+         'groupYear':5},
+
+    ]
+    '''
+
+    createDisciplines(dados)
+
+
+    return 'successfull'
+
+
+
 
 
 

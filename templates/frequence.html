@@ -61,8 +61,15 @@
     "weekday":"Quarta-feira"}]
     -->
 
+    {% for row in dadosDisciplina %}
 
+        {% for k,v in row.items() %}
 
+            {{ k }} : {{ v }}
+
+        {% endfor %}
+
+    {% endfor %}
 
 </body>
 </html>
