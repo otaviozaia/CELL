@@ -5,7 +5,8 @@
 from app import db
 from ModelsDB.tables import daily_frequence
 from flask_sqlalchemy import SQLAlchemy
-
+from Frequences.functionsFrequence.frequenceDiscipline import getDisciplinesAusences
+from Frequences.functionsFrequence.alunos import returnRa
 
 
 #RETORNA FREQUENCIAS DE UM DETERMINADO ALUNO BUSCANDO PELO RA
@@ -66,7 +67,26 @@ def getFrequenceDaily_Student(ra):
 
     return dados
 
+#RETORNA FREQUENCIAS DE DETERMINADO ALUNO
+def getFrequenceRa(ra):
 
+    aluno = returnRa(ra)
+
+    if aluno != None:
+
+        year = aluno.year
+
+        #retorna frequencias diárias
+        dados = getFrequenceDaily_Student(ra)
+
+        #retorna frequencias por disciplina
+        dadosDisciplina = getDisciplinesAusences(ra,year)
+
+
+        return dados,dadosDisciplina
+    
+    else:
+        return None
 
 
 

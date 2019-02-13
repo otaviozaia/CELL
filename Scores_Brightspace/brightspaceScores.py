@@ -240,7 +240,7 @@ def getDados():
     #definindo rota de requisição para a API do tenda. */use/me? é utilizada para recuperar todas as informações sobre um usuário
     api_url = '{0}/user/me?'.format(api_url_base)
 
-    #a variável responde guardará o retorno da requisição feita ao tenda
+    #a variável response guardará o retorno da requisição feita ao tenda
     response = requests.get(api_url,headers=headers1)
 
     # variável datas recebe resultado do response em json

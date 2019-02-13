@@ -40,6 +40,8 @@ def insertStudent():
     #executa função registerDatas com o dado enviado via POST
     registerDatas(request.get_json())
 
+    return 'successfull!'
+
 
 @app.route("/students/delete",methods=["POST"])
 def deleteStudent():
@@ -63,6 +65,8 @@ def deleteStudent():
         ra = row
 
         deleteDatas(ra)
+
+    return 'successfull!'
 
 #ROTA PARA RETORNAR ALUNOS
 #/students?option=all
@@ -140,7 +144,7 @@ def insertGrades():
 
         registerGrades(grade)
 
-
+    return 'successfull!'
 
 
 @app.route('/frequence/set-grids',methods=['POST'])
@@ -238,24 +242,61 @@ def frequenceCheck():
 
     return 'successfull!'
 
-#RETORNA FREQUENCIAS DE DETERMINADO ALUNO
-#/frequence/return?ra=3958
-@app.route('/frequence/return')
-def getFrequenceRa():
+#frequence?token=TOKEN&community=COMMUNITY
+#retorna frequencias diárias e por matérias/disciplinas
+@app.route('/frequence')
+def getFrequenceByStudent():
 
-    ra = request.args.get("ra")
-
-    aluno = returnRa(ra)
-
-    year = aluno.year
-
-    dados = getFrequenceDaily_Student(ra)
-
-
-    dadosDisciplina = getDisciplinesAusences(ra,year)
+    token = request.args.get("token")
+    community = request.args.get("community")
+    #armazenará resposta final
+    datas = None
+    #armazenará os alias e nomes existentes no json inserido em 'datas'
+    raS = []
+    names = []
+    frequencesStudy = []
 
 
-    return render_template('frequence.html',dados=dados,dadosDisciplina=dadosDisciplina)
+    api_url_base = 'https://api.edu.tenda.digital/v1' #rota padrão para todas as requisições feitas à API do tenda
+    #os headers são recebidos na rota pelas variáveis token e community
+    headers1 = {'community-id':community,
+               'Content-type':'application/json',
+               'Authorization':'Bearer {0}'.format(token)}
+    
+    #definindo rota de requisição para a API do tenda. */use/me? é utilizada para recuperar todas as informações sobre um usuário
+    api_url = '{0}/user/me?'.format(api_url_base)
+
+    #a variável response guardará o retorno da requisição feita ao tenda
+    response = requests.get(api_url,headers=headers1)
+
+    # variável datas recebe resultado do response em json
+    datas = json.loads(response.content)
+
+    #escolhemos os itens que queremos retornar dentro do json, aqui no caso o alias (identificador (no menu contas) e ID (ID quando for registrar aluno no menu alunos)) * obs: alias seria o RA
+    #alias =  datas['members'][0]['alias']
+
+    #armazeno na variável array todos os alias de alunos associados à conta 'familiar' 
+    if raS == []:
+        for i in range(len(datas['members'])):
+            raS.append(datas['members'][i]['alias'])
+
+    if names == []:
+        for name in range(len(datas['members'])):
+            names.append(datas['members'][name]['name'])
+
+    for ra in raS:
+
+        frequences = getFrequenceRa(ra)
+
+        if frequences != None:
+            frequencesStudy.append(frequences)
+
+
+    return jsonify(frequencesStudy)
+
+
+
+#-------------------------------------------------DISCIPLINAS----------------------------------------------------
 
 
 
@@ -272,22 +313,28 @@ def disciplineCreate():
 
         {'name':'TEP',
         'description':'TESTE',
-         'groupYear':5},
+         'groupYear':1},
          {'name':'Geografia',
         'description':'TESTE',
-         'groupYear':5},
+         'groupYear':1},
          {'name':'Língua Portuguesa',
         'description':'TESTE',
-         'groupYear':5},
+         'groupYear':1},
          {'name':'Língua Inglesa',
         'description':'TESTE',
-         'groupYear':5},
+         'groupYear':1},
          {'name':'Educação Física',
         'description':'TESTE',
-         'groupYear':5}, 
+         'groupYear':1}, 
          {'name':'TEP Duplo Fixo',
         'description':'TESTE',
-         'groupYear':5},
+         'groupYear':1},
+         {'name':'Matemática',
+        'description':'TESTE',
+         'groupYear':1},
+         {'name':'Ciências',
+        'description':'TESTE',
+         'groupYear':1},
 
     ]
     '''
