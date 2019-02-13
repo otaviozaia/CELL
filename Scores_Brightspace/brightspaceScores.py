@@ -56,7 +56,7 @@ def requestApi(ra):
 
     #autenticamos a rota
     url1 = uc.create_authenticated_url(route1)
-    
+   
     #fazemos a requisição concatenando parâmetros para enviar via GET, o parâmetro busca um usuário específico pelo "ID Definido pela Instituição" no Brightspace
     #"ID Definido pela instituição" deve ser o mesmo "ALIAS" retornado do tendaEdu
     r1 = requests.get(url1+'&OrgDefinedId='+ra)
