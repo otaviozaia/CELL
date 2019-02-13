@@ -30,7 +30,7 @@ def test_ocurrences(client):
 #Scores_Brightspace.brightspaceScores
 def test_push_key(client):
     
-    res = client.get('/push-key?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUGFpIFRlc3RlIiwiY29tbXVuaXR5IjoidmVyZWRhLXNhdnAiLCJlbWFpbCI6Im90YXZpb3phaWFAaG90bWFpbC5jb20iLCJpZCI6IjVjNTA3OTFlMWJkMjNkMDAyMzU1ZTZkNCIsInR5cGUiOiJhdXRoOnVzZXIiLCJkYXRlIjoiMjAxOS0wMi0xM1QxNTowNjo0MC42OTdaIiwiaWF0IjoxNTUwMDcwNDAwfQ.pKWHioR8junR41FsQ4vA0OLxVuvP4r86X4NBE7xBExk&community=vereda-savp')   
+    res = client.get('/push-key?token=<TOKEN USUARIO>&community=vereda-savp')   
     assert res.status_code == 200
 
 
@@ -38,7 +38,7 @@ def test_push_key(client):
 #Frequences.frequence  
 def test_return_frequence(client):
 
-    res = client.get('frequence?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUGFpIFRlc3RlIiwiY29tbXVuaXR5IjoidmVyZWRhLXNhdnAiLCJlbWFpbCI6Im90YXZpb3phaWFAaG90bWFpbC5jb20iLCJpZCI6IjVjNTA3OTFlMWJkMjNkMDAyMzU1ZTZkNCIsInR5cGUiOiJhdXRoOnVzZXIiLCJkYXRlIjoiMjAxOS0wMi0xM1QxNTowNjo0MC42OTdaIiwiaWF0IjoxNTUwMDcwNDAwfQ.pKWHioR8junR41FsQ4vA0OLxVuvP4r86X4NBE7xBExk&community=vereda-savp')
+    res = client.get('frequence?token=<TOKEN USUARIO>&community=vereda-savp')
     assert res.status_code == 200
 
 
