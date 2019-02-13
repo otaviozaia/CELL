@@ -83,7 +83,7 @@ def getFrequenceRa(ra):
         dadosDisciplina = getDisciplinesAusences(ra,year)
 
 
-        return dados,dadosDisciplina
+        return {'daily':dados,'disciplines':dadosDisciplina}
     
     else:
         return None

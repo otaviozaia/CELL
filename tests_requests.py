@@ -1,4 +1,4 @@
-#---------------------------------------TESTES AUTOMATIZADOS----------------------------------------------------
+#---------------------------------------FILE PARA TESTES AUTOMATIZADOS----------------------------------------------------
 
 import os
 import tempfile
@@ -25,7 +25,7 @@ def test_ocurrences(client):
     res = client.get('/ocurrences')
     assert res.status_code == 200  or res.status_code == 404
 
-
+'''
 #TESTANDO ROTA QUE RETORNA NOTAS DOS FILHOS DE UM USUÁRIO DO TENDAEDU
 #Scores_Brightspace.brightspaceScores
 def test_push_key(client):
@@ -38,7 +38,29 @@ def test_push_key(client):
 #Frequences.frequence  
 def test_return_frequence(client):
 
-    res = client.get('frequence?token=<TOKEN USUARIO>&community=vereda-savp')
+    res = client.get('/frequence?token=<TOKEN USUARIO>&community=vereda-savp')
     assert res.status_code == 200
+'''
 
+
+def test_check_frequences(client):
+    
+    labels = [
+
+        {"type":"ENTRADA",
+        "time":"2018-10-04 07:01:45",
+        "name":"FILHO 1",
+        "ra":"1701998",
+        "weekday":2},
+        
+        {"type":"SAIDA",
+        "time":"2018-10-04 15:06:55",
+        "name":"FILHO 1",
+        "ra":"1701998",
+        "weekday":2}
+
+    ]
+
+    res = client.post('/frequence/events',json=labels)
+    assert res.status_code == 200
 

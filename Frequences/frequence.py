@@ -242,8 +242,9 @@ def frequenceCheck():
 
     return 'successfull!'
 
-#frequence?token=TOKEN&community=COMMUNITY
+
 #retorna frequencias diárias e por matérias/disciplinas
+#frequence?token=TOKEN&community=COMMUNITY
 @app.route('/frequence')
 def getFrequenceByStudent():
 
@@ -291,8 +292,80 @@ def getFrequenceByStudent():
         if frequences != None:
             frequencesStudy.append(frequences)
 
+    #exemplo json frequencesStudy:
+    #[
+    # { 'daily':
+    #   [{"_id":1,
+    #   "date":"13/2/2019",
+    #   "entrada":8.01,
+    #   "name":"FILHO 1",
+    #   "p1":1,"p10":1,
+    #   "p2":0,
+    #   "p3":0,
+    #   "p4":0,
+    #   "p5":0,
+    #   "p6":0,
+    #   "p7":0,
+    #   "p8":0,
+    #   "p9":0,
+    #   "ra":"1701998",
+    #   "saida":15.06,
+    #   "total":2,
+    #   "weekday":"Segunda-feira"}
+    #   ],
+    #   'disciplines':
+    #   [
+    #   {"TEP":1},
+    #   {"Geografia":0},
+    #   {"Língua Portuguesa":0},
+    #   {"Língua Inglesa":0},
+    #   {"Educação Física":1},
+    #   {"TEP Duplo Fixo":0},
+    #   {"Matemática":0},{"Ciências":0},
+    #   {"História":0}
+    #   ]
+    # },
+    # 
+    # { 'daily':
+    #  [{"_id":2,
+    #   "date":"13/2/2019",
+    #   "entrada":9.01,
+    #   "name":"FILHO 2",
+    #   "p1":1,
+    #   "p10":1,
+    #   "p2":1,
+    #   "p3":0,
+    #   "p4":0,
+    #   "p5":0,
+    #   "p6":0,
+    #   "p7":0,
+    #   "p8":0,
+    #   "p9":1,
+    #   "ra":"1701999",
+    #   "saida":14.06,
+    #   "total":4,
+    #   "weekday":
+    #   "Segunda-feira"}
+    #   ],
+    #   'disciplines':
+    #   [
+    #   {"TEP":2},
+    #   {"Geografia":0},
+    #   {"Língua Portuguesa":0},
+    #   {"Língua Inglesa":0},
+    #   {"Educação Física":2},
+    #   {"TEP Duplo Fixo":0},
+    #   {"Matemática":0},
+    #   {"Ciências":0},
+    #   {"História":0}
+    #   ]
+    #  }
+    #]
+
 
     return jsonify(frequencesStudy)
+
+    #return render_template('frequence.html',frequencesStudy=frequencesStudy)
 
 
 
