@@ -61,137 +61,144 @@ def requestApi(ra):
     #"ID Definido pela instituição" deve ser o mesmo "ALIAS" retornado do tendaEdu
     r1 = requests.get(url1+'&OrgDefinedId='+ra)
 
-    #recebe informações sobre usuário, dentre elas o id definido pelo SISTEMA BRIGHTSPACE
-    dadosStudent = json.loads(r1.content)
+    if r1.status_code == 404:
 
-    #capturamos o id de sistema do usuário para as futuras requisições
-    id = dadosStudent[0]['UserId']
+        message = 'Aluno não cadastrado em Vereda Digital.'
 
-    #-----------------------------------REQUSIÇÃO PARA OBTER INFORMAÇÕES SOBRE CURSOS DO ALUNO----------------------
+        dic = {'Erro: ':message}
 
-    route2 = '/d2l/api/lp/1.0/enrollments/users/'+str(id)+'/orgUnits/'
+        return dic
 
+    else:
+        #recebe informações sobre usuário, dentre elas o id definido pelo SISTEMA BRIGHTSPACE
+        dadosStudent = json.loads(r1.content)
 
-    url2 = uc.create_authenticated_url(route2)
+        #capturamos o id de sistema do usuário para as futuras requisições
+        id = dadosStudent[0]['UserId']
 
+        #-----------------------------------REQUSIÇÃO PARA OBTER INFORMAÇÕES SOBRE CURSOS DO ALUNO----------------------
 
-    r2 =  requests.get(url2)
-
-    #coletará json que contem informações gerais sobre os cursos do aluno dentre outros dados
-    orgUnits = json.loads(r2.content)
-
-    #pegará no json apenas as informações sobre cursos que estará dentro de 'Items'
-    courses = orgUnits['Items']
-
-    #Items é uma lista
-    for course in courses:
-        #exemplo de estrutura para course: ----------------------------------------------------------------------------
-        #{
-		#	"OrgUnit": {
-		#		"Id": 6695,
-		#		"Type": {
-		#			"Id": 3,
-		#			"Code": "Course Offering",
-		#			"Name": "Oferta de Curso"
-		#		},
-		#		"Name": "Língua Inglesa - 2º Ano",
-		#		"Code": "VLIEF02"
-		#	},
-		#	"Role": {
-		#		"Id": 103,
-		#		"Code": "",
-		#		"Name": "Student"
-		#	}
-		#}
-        #----------------------Acrescentando nome e id de curso no dicionário courseId_Name----------------------------
-        if course['OrgUnit']['Type']['Code'] != 'Organization' and course['OrgUnit']['Type']['Code'] != 'Group':
-            
-            #nome do curso
-            nameCourse = course['OrgUnit']['Name']
-            
-            #id do curso
-            idCourse = str(course['OrgUnit']['Id'])#convertemos para string porque iremos utilizar em requisições
+        route2 = '/d2l/api/lp/1.0/enrollments/users/'+str(id)+'/orgUnits/'
 
 
-            courseId_Name_Avals[idCourse] = {nameCourse:{}}
-
-        #RESULTADO exemplo: {'6695': {'Língua Inglesa - 2º Ano': {}}, '6698': {'Ciências - 8º Ano ': {}}}
+        url2 = uc.create_authenticated_url(route2)
 
 
-        #-------------------------------ADICIONANDO NOME DOS OBJETOS E NOTAS-------------------------------------------
+        r2 =  requests.get(url2)
 
-        #se o aluno estiver matriculado em alguma disciplina:
-        if courseId_Name_Avals != {}:
+        #coletará json que contem informações gerais sobre os cursos do aluno dentre outros dados
+        orgUnits = json.loads(r2.content)
 
-            #key será o id do curso e o value será o nome
-            for key,value in courseId_Name_Avals.items():
+        #pegará no json apenas as informações sobre cursos que estará dentro de 'Items'
+        courses = orgUnits['Items']
 
-                #rota que pegará informações sobre os objetos(avaliações) do curso utilizando id (curso) e id(aluno)
-                route3 = '/d2l/api/le/1.0/'+key+'/grades/values/'+str(id)+'/'
-
-
-                url3 = uc.create_authenticated_url(route3)
-
+        #Items é uma lista
+        for course in courses:
+            #exemplo de estrutura para course: ----------------------------------------------------------------------------
+            #{
+            #	"OrgUnit": {
+            #		"Id": 6695,
+            #		"Type": {
+            #			"Id": 3,
+            #			"Code": "Course Offering",
+            #			"Name": "Oferta de Curso"
+            #		},
+            #		"Name": "Língua Inglesa - 2º Ano",
+            #		"Code": "VLIEF02"
+            #	},
+            #	"Role": {
+            #		"Id": 103,
+            #		"Code": "",
+            #		"Name": "Student"
+            #	}
+            #}
+            #----------------------Acrescentando nome e id de curso no dicionário courseId_Name----------------------------
+            if course['OrgUnit']['Type']['Code'] != 'Organization' and course['OrgUnit']['Type']['Code'] != 'Group':
                 
-                r3 =  requests.get(url3)
+                #nome do curso
+                nameCourse = course['OrgUnit']['Name']
+                
+                #id do curso
+                idCourse = str(course['OrgUnit']['Id'])#convertemos para string porque iremos utilizar em requisições
 
 
-                if r3.status_code <= 200:
+                courseId_Name_Avals[idCourse] = {nameCourse:{}}
 
-                    datasObjects = json.loads(r3.content)
-
-
-                    #os passos seguintes só irão acontecer se dataObjects existir, senão irá para o próximo looping (próximo curso)
-                    #k será o nome do curso em courseId_Name_Avals e v será um dic vazio, os dois sempre terão tamanho len(0)
-                    for k,v in value.items():
-
-                        #objects serão as avaliações
-                        for objects in datasObjects:
-
-                            #nome da avaliação
-                            nameAval =  objects['GradeObjectName']
-
-                            #nota da avaliação
-                            scoreAval = objects['DisplayedGrade']
-
-                            #v é o nosso dicionário vazio dentro do nome do curso, recebe nome como chave e nota como valor 
-                            v[nameAval] = scoreAval
-
-                            #RESULTADO exemplo:["{'6695': {'Língua Inglesa - 2º Ano': {'Aval teste inglês ': '66,67%', 'Nota trimestral': '100%'}}, '6698': {'Ciências - 8º Ano ': {}}}]"
+            #RESULTADO exemplo: {'6695': {'Língua Inglesa - 2º Ano': {}}, '6698': {'Ciências - 8º Ano ': {}}}
 
 
-            #--------------------------------------CAPTURANDO NOTA FINAL DE CADA CURSO------------------------------------
+            #-------------------------------ADICIONANDO NOME DOS OBJETOS E NOTAS-------------------------------------------
 
-                        route4 = '/d2l/api/le/1.0/'+key+'/grades/final/values/'+str(id)
+            #se o aluno estiver matriculado em alguma disciplina:
+            if courseId_Name_Avals != {}:
 
-                        url4 = uc.create_authenticated_url(route4)
+                #key será o id do curso e o value será o nome
+                for key,value in courseId_Name_Avals.items():
 
-                        r4 =  requests.get(url4)
-
-                        #se o curso tiver uma nota final já computada (só não terá se não houverem avaliações, porém se for vazio dará erro) :
-                        if r4.status_code <= 200:
-
-                            dadosFinalscore = json.loads(r4.content)
+                    #rota que pegará informações sobre os objetos(avaliações) do curso utilizando id (curso) e id(aluno)
+                    route3 = '/d2l/api/le/1.0/'+key+'/grades/values/'+str(id)+'/'
 
 
-                            v['Nota Final'] = dadosFinalscore['DisplayedGrade']
-        
-                        else:
-                            v['Nota Final'] = 'Indefinida'
+                    url3 = uc.create_authenticated_url(route3)
 
-            #-------------------------------------------------------------------------------------------------------------                            
-        '''
-        #se o aluno não estiver cadastrado em alguma disciplina:
-        else:
+                    
+                    r3 =  requests.get(url3)
 
-            bash = '#Erro:'
 
-            message = 'Aluno não cadastrado em disciplinas!'
+                    if r3.status_code <= 200:
 
-            courseId_Name_Avals[bash] = message
-        '''
+                        datasObjects = json.loads(r3.content)
 
-    return courseId_Name_Avals  
+
+                        #os passos seguintes só irão acontecer se dataObjects existir, senão irá para o próximo looping (próximo curso)
+                        #k será o nome do curso em courseId_Name_Avals e v será um dic vazio, os dois sempre terão tamanho len(0)
+                        for k,v in value.items():
+
+                            #objects serão as avaliações
+                            for objects in datasObjects:
+
+                                #nome da avaliação
+                                nameAval =  objects['GradeObjectName']
+
+                                #nota da avaliação
+                                scoreAval = objects['DisplayedGrade']
+
+                                #v é o nosso dicionário vazio dentro do nome do curso, recebe nome como chave e nota como valor 
+                                v[nameAval] = scoreAval
+
+                                #RESULTADO exemplo:["{'6695': {'Língua Inglesa - 2º Ano': {'Aval teste inglês ': '66,67%', 'Nota trimestral': '100%'}}, '6698': {'Ciências - 8º Ano ': {}}}]"
+
+
+                #--------------------------------------CAPTURANDO NOTA FINAL DE CADA CURSO------------------------------------
+
+                            route4 = '/d2l/api/le/1.0/'+key+'/grades/final/values/'+str(id)
+
+                            url4 = uc.create_authenticated_url(route4)
+
+                            r4 =  requests.get(url4)
+
+                            #se o curso tiver uma nota final já computada (só não terá se não houverem avaliações, porém se for vazio dará erro) :
+                            if r4.status_code <= 200:
+
+                                dadosFinalscore = json.loads(r4.content)
+
+
+                                v['Nota Final'] = dadosFinalscore['DisplayedGrade']
+            
+                            else:
+                                v['Nota Final'] = 'Indefinida'
+
+                #-------------------------------------------------------------------------------------------------------------                            
+
+            #se o aluno não estiver cadastrado em alguma disciplina:
+            elif courseId_Name_Avals == {}:
+
+                message = 'Aluno não cadastrado em disciplinas!'
+
+                courseId_Name_Avals['Erro: '] = message
+
+
+        return courseId_Name_Avals  
 
 
 

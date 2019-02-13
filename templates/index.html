@@ -21,7 +21,8 @@
                         <th>{{ raS[nome] }}</th>
                         </tr>
                         </thead>
-                        {% for idDisciplina, dadosDisciplina in studentScores[nome].items() %}
+                        {% for idDisciplina, dadosDisciplina in studentScores[nome].items() %}<!--idDisciplina é o código de uma uniOrganization (curso), enquanto dados são nomes(disciplinas) + objetos(notas avaliativas)-->
+                        {% if idDisciplina != 'Erro: ' %} <!--se a chave for erro significa que o aluno não possui cursos (examinar brightspaceScores função requestApi())-->
                             {% for nomeDisciplina, objetos in dadosDisciplina.items() %}
                                 <thead class="thead-light">
                                 <tr>
@@ -48,6 +49,16 @@
                                     {% endfor %}
                                 </tbody>
                             {% endfor %}
+                        {% else %}<!--se o aluno não possuir cursos retornamos o resultado de idDisciplina e dadosDisciplina que é 'Erro: ','Aluno não cadastrado em Disciplinas!'-->
+                            <thead class="thead-light">
+                            <tr>
+                            <th>{{ idDisciplina }}</th>
+                            <th>{{ dadosDisciplina }}</th>
+                            </tr>
+                            </thead>
+
+
+                        {% endif %}
                         {% endfor %}
                     {% endfor %}
                 </table>
