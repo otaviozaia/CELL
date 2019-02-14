@@ -363,9 +363,9 @@ def getFrequenceByStudent():
     #]
 
 
-    return jsonify(frequencesStudy)
+    #return jsonify(frequencesStudy)
 
-    #return render_template('frequence.html',frequencesStudy=frequencesStudy)
+    return render_template('frequence.html',frequencesStudy=frequencesStudy)
 
 
 

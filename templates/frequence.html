@@ -7,6 +7,32 @@
     <title>Document</title>
 </head>
 <body>
-    
+    {% for student in frequencesStudy %}
+        {% for type,frequences in student.items() %}
+            {% if type == 'daily' %}
+
+                {% for frequence_daily in student[type] %}
+
+                    {% for key,value in frequence_daily.items() %}
+
+                        {{ key }} : {{ value }}<hr>
+
+                    {% endfor %}
+                
+                {% endfor %}
+            
+            {% elif type == 'disciplines' %}
+
+                {% for discipline_frequence in student[type] %}
+
+                    {% for discipline, ausences in discipline_frequence.items() %}
+
+                        {{ discipline }} : {{ ausences }}<hr>
+
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 </body>
 </html>

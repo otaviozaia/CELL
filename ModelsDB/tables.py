@@ -66,16 +66,6 @@ class Student(db.Model):
 
 
 
-#apenas teste para criação de tabelas sqlite
-class Test(db.Model):
-    __tablename__='Test'
-    _pk = db.Column(db.Integer,primary_key=True,autoincrement=True)
-    value = db.Column(db.String(20))
-
-
-
-
-
 #coleta a grade horária por turma e dia da semana contando 10 períodos
 class Grades(db.Model):
     __tablename__='Grades'
