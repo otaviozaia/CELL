@@ -654,3 +654,10 @@ def createEventList(datas):
 
     #return entradaSaida
     return entradaSaida
+
+
+
+
+
+
+
