@@ -288,12 +288,85 @@ def checkFrequence(datas):
             name = row['name']
             group = row['group']
             weekday = row['events']['weekday']
-            enter = row['events']['ENTRADA'] #capturamos datetime de entrada nos eventos
-            exit = row['events']['SAIDA'] #capturamos datetime de saída nos eventos
             date = dateBase
 
-
             grade = Grades.query.filter_by(turma=group,diaSemana=weekday).first()
+
+            #verificando se a hora do events é entrada ou saída do almoço:
+            for event in row['events']:
+
+                #definimos globais do looping que serão onde começa e termina o almoço do aluno naquele dia
+                init_lunch = None
+                finish_lunch = None
+
+                #convertemos a hora do evento para um float
+                crashTimeEvent = event.split(' ')
+                hourEvent = crashTimeEvent[1]
+                crashHourEvent = hourEvent.split(':')
+                result = float(crashHourEvent[0]+'.'+crashHourEvent[1])
+
+                #verificamos qual o período da grade horária daquele dia que é almoço
+                #encontramos-na e capturamos o início e fim do período de almoço
+                if grade.p1materia == 'Almoço':
+
+                    init_lunch = grade.p1init 
+                    finish_lunch = grade.p1finish
+                
+                elif grade.p2materia == 'Almoço':
+    
+                    init_lunch = grade.p2init 
+                    finish_lunch = grade.p2finish
+                
+                elif grade.p3materia == 'Almoço':
+    
+                    init_lunch = grade.p3init 
+                    finish_lunch = grade.p3finish
+                
+                elif grade.p4materia == 'Almoço':
+    
+                    init_lunch = grade.p4init 
+                    finish_lunch = grade.p4finish
+                
+                elif grade.p5materia == 'Almoço':
+    
+                    init_lunch = grade.p5init 
+                    finish_lunch = grade.p5finish
+                
+                elif grade.p6materia == 'Almoço':
+    
+                    init_lunch = grade.p6init 
+                    finish_lunch = grade.p6finish
+                
+                elif grade.p7materia == 'Almoço':
+    
+                    init_lunch = grade.p7init 
+                    finish_lunch = grade.p7finish
+                
+                elif grade.p8materia == 'Almoço':
+    
+                    init_lunch = grade.p8init 
+                    finish_lunch = grade.p8finish
+
+                elif grade.p9materia == 'Almoço':
+        
+                    init_lunch = grade.p9init 
+                    finish_lunch = grade.p9finish
+
+                elif grade.p10materia == 'Almoço':
+        
+                    init_lunch = grade.p10init 
+                    finish_lunch = grade.p10finish
+
+                #se a hora do evento estiver entre entrada e saída do almoço, desconsideramos-na
+                if result >= init_lunch and result <= finish_lunch:
+
+                    #editar desconsideração***
+                    return None
+
+            enter = row['events']['ENTRADA'] #capturamos datetime de entrada nos eventos
+            exit = row['events']['SAIDA'] #capturamos datetime de saída nos eventos
+            
+
 
             if grade:
 
@@ -319,50 +392,50 @@ def checkFrequence(datas):
                 #comparamos o momento de entrada e saída com cada período (início e fim)
                 #para contarmos as presenças
                 #cada período possui 15 minutos de tolerancia, ou seja : float(0.15)
-                if entrada <= grade.p1init+0.15 and saida >= grade.p1finish:
+                if entrada <= grade.p1init and saida >= grade.p1finish:
 
                     p1 = 0
 
-                if entrada <= grade.p2init+0.15 and saida >= grade.p2finish:
+                if entrada <= grade.p2init and saida >= grade.p2finish:
 
                     p2 = 0
 
-                if entrada <= grade.p3init+0.15 and saida >= grade.p3finish:
+                if entrada <= grade.p3init and saida >= grade.p3finish:
 
                     p3 = 0
 
 
-                if entrada <= grade.p4init+0.15 and saida >= grade.p4finish:
+                if entrada <= grade.p4init and saida >= grade.p4finish:
         
                     p4 = 0
 
 
-                if entrada <= grade.p5init+0.15 and saida >= grade.p5finish:
+                if entrada <= grade.p5init and saida >= grade.p5finish:
         
                     p5 = 0
 
                 
-                if entrada <= grade.p6init+0.15 and saida >= grade.p6finish:
+                if entrada <= grade.p6init and saida >= grade.p6finish:
         
                     p6 = 0
 
 
-                if entrada <= grade.p7init+0.15 and saida >= grade.p7finish:
+                if entrada <= grade.p7init and saida >= grade.p7finish:
         
                     p7 = 0
 
 
-                if entrada <= grade.p8init+0.15 and saida >= grade.p8finish:
+                if entrada <= grade.p8init and saida >= grade.p8finish:
         
                     p8 = 0
 
 
-                if entrada <= grade.p9init+0.15 and saida >= grade.p9finish:
+                if entrada <= grade.p9init and saida >= grade.p9finish:
         
                     p9 = 0
 
                 
-                if entrada <= grade.p10init+0.15 and saida >= grade.p10finish:
+                if entrada <= grade.p10init and saida >= grade.p10finish:
         
                     p10 = 0
 
