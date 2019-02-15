@@ -4,7 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///ra.db"
+#app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///ra.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:@Legace102@localhost/vereda?charset=utf8"
 app.config['JSON_AS_ASCII'] = False #para UTF-8
 db = SQLAlchemy(app)
 

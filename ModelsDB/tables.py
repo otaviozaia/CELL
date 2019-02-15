@@ -237,7 +237,7 @@ class Disciplines(db.Model):
     __tablename__='Disciplines'
     _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100))
-    description = db.Column(db.String(500))
+    description = db.Column(db.String(200))
     groupYear = db.Column(db.Integer)
 
     def __init__(self, name, description, groupYear):
