@@ -186,7 +186,7 @@ def test_create_disciplines(client):
     res = client.post('/disciplines/create',json=json)
     assert res.status_code == 200
 
-
+'''
 
 
 #testando crud de periodos:
@@ -204,7 +204,6 @@ def test_insert_periods(client):
     res = client.post('/periods/insert',json=labels)
     assert res.status_code == 200
 
-'''
 
 
 
