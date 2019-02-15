@@ -40,7 +40,7 @@ def test_return_frequence(client):
 
     res = client.get('/frequence?token=<TOKEN USUARIO>&community=vereda-savp')
     assert res.status_code == 200
-'''
+
 
 
 def test_check_frequences(client):
@@ -89,7 +89,7 @@ def test_check_frequences(client):
     assert res.status_code == 200
 
 
-'''
+
 def test_insert_grid(client):
 
     json = [{'group':'1ºA',
@@ -186,4 +186,25 @@ def test_create_disciplines(client):
     res = client.post('/disciplines/create',json=json)
     assert res.status_code == 200
 
+
+
+
+#testando crud de periodos:
+def test_insert_periods(client):
+
+    labels = [
+      {'name':'1ºTrimestre','inicio':'28-1-2019','final':'31-3-2019'},
+      {'name':'2ºTrimestre/1','inicio':'1-4-2019','final':'20-6-2019'},
+      {'name':'Férias','inicio':'21-6-2019','final':'31-7-2019'},
+      {'name':'2ºTrimestre/2','inicio':'1-8-2019','final':'10-9-2019'},
+      {'name':'3ºTrimestre','inicio':'1-10-2019','final':'30-9-2019'}
+    ]
+
+
+    res = client.post('/periods/insert',json=labels)
+    assert res.status_code == 200
+
 '''
+
+
+

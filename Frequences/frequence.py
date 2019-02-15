@@ -18,6 +18,13 @@ from Frequences.functionsFrequence.return_frequence import*
 from Frequences.functionsFrequence.crud_disciplines import*
 #importa funções de frequencia
 from Frequences.functionsFrequence.frequenceDiscipline import*
+#importa funções crud de períodos(trimestres)
+from Frequences.functionsFrequence.crud_periods import*
+#importa funções crud de quantidade de aulas por matéria
+from Frequences.functionsFrequence.crud_qnt_classes import*
+
+
+
 
 
 #------------------------------------------------ALUNOS-------------------------------------------------------------
@@ -419,7 +426,35 @@ def disciplineCreate():
 
 
 
+#-------------------------------------------PERÍODOS(TRIMESTRES)-------------------------------------------------
 
 
+
+@app.route('/periods/insert',methods=['POST'])
+def insertPeriods():
+
+    datas = request.get_json()
+
+    #json sample:
+
+    '''
+    json = [
+      {'name':'1ºTrimestre','inicio':'28-1-2019','final':'31-3-2019'},
+      {'name':'2ºTrimestre/1','inicio':'1-4-2019','final':'20-6-2019'},
+      {'name':'Férias','inicio':'21-6-2019','final':'31-7-2019'},
+      {'name':'2ºTrimestre/2','inicio':'1-8-2019','final':'10-9-2019'},
+      {'name':'3ºTrimestre','inicio':'1-10-2019','final':'30-9-2019'}
+    ]
+    '''
+
+
+    insert_periods(datas)
+
+
+    return 'Successfull'
+
+
+
+#--------------------------------------------------TOTAIS AULAS POR PERÍODOS-------------------------------------
 
 
