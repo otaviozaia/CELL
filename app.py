@@ -1,11 +1,11 @@
 #----------------------------------------------SERVER E CONFIGURAÇÕES DO APP-------------------------------------
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
+from credenciais import*
 
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///ra.db"
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:@Legace102@localhost/vereda?charset=utf8"
+app.config['SQLALCHEMY_DATABASE_URI'] = string_bd_connection_mysql
 app.config['JSON_AS_ASCII'] = False #para UTF-8
 db = SQLAlchemy(app)
 

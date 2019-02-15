@@ -1,5 +1,6 @@
 #---------------ESSE MÓDULO COLETARÁ INFORMAÇÕES DO GOOGLE SHEETS E CRIARÁ NOTIFICAÇÕES NO TENDAEDU-------------------
 
+from credenciais import*
 from app import app
 from flask import jsonify, request, render_template, redirect
 import json
@@ -9,6 +10,7 @@ from httplib2 import Http
 from oauth2client import file, client, tools
 import datetime
 
+token_tenda = token_tenda_1
 
 #essa rota será requisitada pelo script da planilha google "Ocurrences" >> https://docs.google.com/spreadsheets/d/1ILU2dxgAkumVD1P3yPt0zN5vZdG8SnWMFYxy47D4biQ/edit#gid=1703648543
 @app.route("/ocorrencias")
@@ -68,7 +70,7 @@ def createNotesTendaEdu(ra,title,text):
     headers = {
 
         'community-id': 'vereda-savp',
-        'Authorization': 'Bearer wFehgVqz8EHAptscJbieaxgr'
+        'Authorization': 'Bearer '+token_tenda
 
 
     }
@@ -149,7 +151,7 @@ def createNotesTendaEdu(ra,title,text):
 
         'Content-type': 'application/json',
         'community-id': 'vereda-savp',
-        'Authorization': 'Bearer wFehgVqz8EHAptscJbieaxgr'
+        'Authorization': 'Bearer '+token_tenda
 
     }
 
@@ -183,7 +185,7 @@ def createNotesTendaEdu(ra,title,text):
     create = requests.post(url_Message,headers=headers2,json=labels)
 
     #rota que busca notificações de certo usuário
-    #url = 'https://api.edu.test.tenda.digital/v1/post?_id=5c3226a2f0830800237bdb0f'
+    #url = 'https://api.edu.test.tenda.digital/v1/post?_id=<idUsuario>'
 
 
 

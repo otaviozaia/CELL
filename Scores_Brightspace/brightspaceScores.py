@@ -1,7 +1,7 @@
 #-------------------CAPTURA NOTAS DE ALUNOS NO BRIGHTSPACE LMS E AS MOSTRA NO TENDAEDU----------------------------
 
 
-
+from credenciais import*
 from flask import jsonify, request, render_template, redirect
 import json
 import requests
@@ -18,7 +18,7 @@ def requestApi(ra):
     courseId_Name_Avals = {}
     
     #essas são chaves que nos são dadas quando registramos nossa api no nosso domínio do brightspace
-    app_creds = { 'app_id': 'D8teWNVT6hq1H1SnLuMgrw', 'app_key': 'Q-kcTUvf6J4Q5LNWVxFmLQ' }
+    app_creds = { 'app_id': app_id_1, 'app_key': app_key_1 }
 
     #criando contexto de aplicação
     ac = d2lauth.fashion_app_context(app_id=app_creds['app_id'], app_key=app_creds['app_key'])
@@ -26,9 +26,9 @@ def requestApi(ra):
     #url base para criar contexto de usuário, conseguimos essa url seguindo os passos de autenticação descritos na documentação da api d2l (Brightspace): https://docs.valence.desire2learn.com/clients/python/index.html TÓPICO "Usage"
 
     #url para o domínio teste (demo)
-    #redirect_url = 'https://vereda-notas.herokuapp.com/test-api?x_a=_387hhfpi7ffMBIUp52kEV&x_b=gy__zGuRE5q9ZPpRsNTdk8&x_c=zTzmPE_7IFhObhuIlerBYbRPwG5e8_a-bTUb2mpsJek'
+    
 
-    redirect_url = 'https://vereda-notas.herokuapp.com/test-api?x_a=Gcndek5_edg05alriWkiW5&x_b=g9Apf8heMFSBd5P1xp-Stb&x_c=EtlJk8IuLX1p6rBaYpADTzQEeHEH1qi1CtZchfrRZOQ'
+    redirect_url = redirect_url_1
                 
 
     #criando contexto de usuário
