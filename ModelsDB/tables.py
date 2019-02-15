@@ -246,8 +246,34 @@ class Disciplines(db.Model):
         self.groupYear = groupYear
 
 
+#guardará os períodos e suas datas de inicio e fim (1º Trimestre, 2ºTrimestre...)
+class Periodos(db.Model):
+    __tablename__='periodos'
+    _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name_periodo = db.Column(db.String(40))
+    init = db.Column(db.Date)
+    finish = db.Column(db.Date)
 
 
+    def __init__(self, name_periodo, init, finish):
+        self.name_periodo = name_periodo
+        self.init = init
+        self.finish = finish
+
+#guardará a quantidade de aulas por disciplina e períodos (1º Trimestre, 2º Trimestre e ano todo)
+class QuantidadeAulas(db.Model):
+    __tablename__='quantidade_aulas'
+    _id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    discipline_name = db.Column(db.String(100))
+    discipline_year = db.Column(db.Integer)
+    discipline_period = db.Column(db.String(40))
+    qnt_classes = db.Column(db.Integer)
+
+    def __init__(self, discipline_name, discipline_period, discipline_year, qnt_classes):
+        self.discipline_name = discipline_name
+        self.discipline_period = discipline_period
+        self.discipline_year = discipline_year
+        self.qnt_classes = qnt_classes
 
 
 
