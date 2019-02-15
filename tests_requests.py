@@ -18,14 +18,14 @@ def client():
 
 
 #------------------------------------------TESTANDO ROTAS:-------------------------------------------------------------
-
+'''
 #TESTANDO ROTA DE OCORRENCIAS
 def test_ocurrences(client):
 
     res = client.get('/ocurrences')
     assert res.status_code == 200  or res.status_code == 404
 
-'''
+
 #TESTANDO ROTA QUE RETORNA NOTAS DOS FILHOS DE UM USUÁRIO DO TENDAEDU
 #Scores_Brightspace.brightspaceScores
 def test_push_key(client):
@@ -51,13 +51,49 @@ def test_check_frequences(client):
         "time":"2018-10-04 07:01:45",
         "name":"FILHO 1",
         "ra":"1701998",
-        "weekday":2},
-        
-        {"type":"SAIDA",
-        "time":"2018-10-04 15:06:55",
+        "weekday":3},
+
+        {"type":"ENTRADA",
+        "time":"2018-10-04 12:45:45",
         "name":"FILHO 1",
         "ra":"1701998",
-        "weekday":2}
+        "weekday":3},
+
+        {"type":"ENTRADA",
+        "time":"2018-10-04 13:30:45",
+        "name":"FILHO 1",
+        "ra":"1701998",
+        "weekday":3},
+        
+        {"type":"SAIDA",
+        "time":"2018-10-04 15:22:55",
+        "name":"FILHO 1",
+        "ra":"1701998",
+        "weekday":3},
+
+        {"type":"ENTRADA",
+        "time":"2018-10-04 09:01:45",
+        "name":"FILHO 2",
+        "ra":"1701999",
+        "weekday":3},
+
+        {"type":"ENTRADA",
+        "time":"2018-10-04 12:41:45",
+        "name":"FILHO 2",
+        "ra":"1701999",
+        "weekday":3},
+
+        {"type":"ENTRADA",
+        "time":"2018-10-04 13:39:45",
+        "name":"FILHO 2",
+        "ra":"1701999",
+        "weekday":3},
+        
+        {"type":"SAIDA",
+        "time":"2018-10-04 15:22:55",
+        "name":"FILHO 2",
+        "ra":"1701999",
+        "weekday":3}
 
     ]
 

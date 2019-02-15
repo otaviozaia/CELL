@@ -29,11 +29,7 @@ def checkFrequence(datas):
             name = row['name']
             weekday = row['events']['weekday']
             date = dateBase
-            #retornamos dados do aluno consultando pelo ra que vem da outa função
-            #porque precisamos de sua turma para capturar a grade horária correta dele naquele dia
-            alunoAtual = returnRa(ra)
-            #capturamos a turma pelo atributo group da classe Student
-            group = alunoAtual.group
+            group = row['group']
 
             #obtemos a grade horária do aluno naquela dia buscando por turma e dia da semana
             grade = Grades.query.filter_by(turma=group,diaSemana=weekday).first()
@@ -292,77 +288,7 @@ def checkFrequence(datas):
 
             grade = Grades.query.filter_by(turma=group,diaSemana=weekday).first()
 
-            #verificando se a hora do events é entrada ou saída do almoço:
-            for event in row['events']:
-
-                #definimos globais do looping que serão onde começa e termina o almoço do aluno naquele dia
-                init_lunch = None
-                finish_lunch = None
-
-                #convertemos a hora do evento para um float
-                crashTimeEvent = event.split(' ')
-                hourEvent = crashTimeEvent[1]
-                crashHourEvent = hourEvent.split(':')
-                result = float(crashHourEvent[0]+'.'+crashHourEvent[1])
-
-                #verificamos qual o período da grade horária daquele dia que é almoço
-                #encontramos-na e capturamos o início e fim do período de almoço
-                if grade.p1materia == 'Almoço':
-
-                    init_lunch = grade.p1init 
-                    finish_lunch = grade.p1finish
-                
-                elif grade.p2materia == 'Almoço':
-    
-                    init_lunch = grade.p2init 
-                    finish_lunch = grade.p2finish
-                
-                elif grade.p3materia == 'Almoço':
-    
-                    init_lunch = grade.p3init 
-                    finish_lunch = grade.p3finish
-                
-                elif grade.p4materia == 'Almoço':
-    
-                    init_lunch = grade.p4init 
-                    finish_lunch = grade.p4finish
-                
-                elif grade.p5materia == 'Almoço':
-    
-                    init_lunch = grade.p5init 
-                    finish_lunch = grade.p5finish
-                
-                elif grade.p6materia == 'Almoço':
-    
-                    init_lunch = grade.p6init 
-                    finish_lunch = grade.p6finish
-                
-                elif grade.p7materia == 'Almoço':
-    
-                    init_lunch = grade.p7init 
-                    finish_lunch = grade.p7finish
-                
-                elif grade.p8materia == 'Almoço':
-    
-                    init_lunch = grade.p8init 
-                    finish_lunch = grade.p8finish
-
-                elif grade.p9materia == 'Almoço':
-        
-                    init_lunch = grade.p9init 
-                    finish_lunch = grade.p9finish
-
-                elif grade.p10materia == 'Almoço':
-        
-                    init_lunch = grade.p10init 
-                    finish_lunch = grade.p10finish
-
-                #se a hora do evento estiver entre entrada e saída do almoço, desconsideramos-na
-                if result >= init_lunch and result <= finish_lunch:
-
-                    #editar desconsideração***
-                    return None
-
+            
             enter = row['events']['ENTRADA'] #capturamos datetime de entrada nos eventos
             exit = row['events']['SAIDA'] #capturamos datetime de saída nos eventos
             
@@ -700,17 +626,94 @@ def createEventList(datas):
             #se o evento conter o ra do aluno que o primeiro looping está varrendo no banco do projeto:
             if event['ra'] == ra:
 
-                #captura sua entrada e coloca no "events"
-                if event['type'] == 'ENTRADA':
-                    events['ENTRADA'] = event['time']
+                diaSemana = event['weekday']
 
-                #ou captura sua saídade e coloca no "events"
-                elif event['type'] == 'SAIDA':
-                    events['SAIDA'] = event['time']
+                #capturamos sua grade horária por turma e dia da semana
+                grade = Grades.query.filter_by(turma=turma,diaSemana=diaSemana).first()
 
-                #events recebe o numero do dia da semana vindo do json,começando de domingo como 1 até sabado como 7
-                events['weekday'] = event['weekday']
+                #se a consulta retornar a grade
+                if grade:
+
+                    #definimos globais do looping que serão onde começa e termina o almoço do aluno naquele dia
+                    init_lunch = None
+                    finish_lunch = None
+
+                    #convertemos a hora do evento para um float
+                    crashTimeEvent = event['time'].split(' ')
+                    hourEvent = crashTimeEvent[1]
+                    crashHourEvent = hourEvent.split(':')
+                    result = float(crashHourEvent[0]+'.'+crashHourEvent[1])
+
+                    #verificamos qual o período da grade horária daquele dia que é almoço
+                    #encontramos-na e capturamos o início e fim do período de almoço
+                    if grade.p1materia == 'Almoço':
+
+                        init_lunch = grade.p1init 
+                        finish_lunch = grade.p1finish
+                    
+                    elif grade.p2materia == 'Almoço':
         
+                        init_lunch = grade.p2init 
+                        finish_lunch = grade.p2finish
+                    
+                    elif grade.p3materia == 'Almoço':
+        
+                        init_lunch = grade.p3init 
+                        finish_lunch = grade.p3finish
+                    
+                    elif grade.p4materia == 'Almoço':
+        
+                        init_lunch = grade.p4init 
+                        finish_lunch = grade.p4finish
+                    
+                    elif grade.p5materia == 'Almoço':
+        
+                        init_lunch = grade.p5init 
+                        finish_lunch = grade.p5finish
+                    
+                    elif grade.p6materia == 'Almoço':
+        
+                        init_lunch = grade.p6init 
+                        finish_lunch = grade.p6finish
+                    
+                    elif grade.p7materia == 'Almoço':
+        
+                        init_lunch = grade.p7init 
+                        finish_lunch = grade.p7finish
+                    
+                    elif grade.p8materia == 'Almoço':
+        
+                        init_lunch = grade.p8init 
+                        finish_lunch = grade.p8finish
+
+                    elif grade.p9materia == 'Almoço':
+            
+                        init_lunch = grade.p9init 
+                        finish_lunch = grade.p9finish
+
+                    elif grade.p10materia == 'Almoço':
+            
+                        init_lunch = grade.p10init 
+                        finish_lunch = grade.p10finish
+
+                    #se a hora do evento estiver entre entrada e saída do almoço, desconsideramos-na
+                    if result >= init_lunch and result <= finish_lunch:
+
+                        pass
+                    
+                    else:
+
+                        #captura sua entrada e coloca no "events"
+                        if event['type'] == 'ENTRADA':
+                            events['ENTRADA'] = event['time']
+
+                        #ou captura sua saídade e coloca no "events"
+                        elif event['type'] == 'SAIDA':
+                            events['SAIDA'] = event['time']
+
+                        #events recebe o numero do dia da semana vindo do json,começando de domingo como 1 até sabado como 7
+                        events['weekday'] = event['weekday']
+                
         #se o events for diferente de vazio, entradaSaida recebe os dados de entrada e saída do aluno +RA + TURMA
         #e presence? == 1
         if events != {}:
@@ -722,7 +725,7 @@ def createEventList(datas):
         #ele recebe em seu events: dia da semana e presence? == 0 
         elif events == {}:
             events['weekday'] = datas[0]['weekday']
-            entradaSaida.append({'ra':ra,'name':name,'events':events,'group':'','presence?':0})
+            entradaSaida.append({'ra':ra,'name':name,'events':events,'group':turma,'presence?':0})
             
 
     #return entradaSaida
