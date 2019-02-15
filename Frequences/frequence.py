@@ -457,12 +457,20 @@ def insertPeriods():
 
 #--------------------------------------------------TOTAIS AULAS POR PERÍODOS-------------------------------------
 
-
+'''
 @app.route('periods/classes-insert',methods=['POST'])
 def insertQntClasess():
 
     datas = request.get_json()
 
+    #json sample
+  
+
+
+
+  
+
     insert_qnt_classes(datas)
 
     return 'successfull' 
+'''
