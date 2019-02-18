@@ -80,11 +80,15 @@ def getFrequenceRa(ra):
         #retorna frequencias diárias
         dados = getFrequenceDaily_Student(ra)
 
-        #retorna frequencias por disciplina
+        #retorna total de frequencias no ano por disciplina
         dadosDisciplina = getDisciplinesAusences(ra,year)
 
 
-        return {'daily':dados,'disciplines':dadosDisciplina}
+        #retorna frequencias por disciplina e período
+        dadosDisciplinaPeriodo = return_frequences_for_periods(ra)
+
+
+        return {'daily':dados,'disciplines':dadosDisciplina,'disciplines_periods':dadosDisciplinaPeriodo}
     
     else:
         return None
@@ -150,3 +154,5 @@ def return_frequences_for_periods(ra):
         dic_discipline[discipline] = dic_periods
 
     return dic_discipline
+
+

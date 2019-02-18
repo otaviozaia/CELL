@@ -12,11 +12,17 @@
         {% for type,frequences in student.items() %}
             {% if type == 'daily' %}
 
+                <p>FREQUÊNCIAS DIÁRIAS:</p><hr>
+
                 {% for frequence_daily in student[type] %}
 
                     {% for key,value in frequence_daily.items() %}
 
-                        {{ key }} : {{ value }}<hr>
+                        {% if key != '_id' %}
+
+                            {{ key }} : {{ value }}<hr>
+                        
+                        {% endif %}
 
                     {% endfor %}
                 
@@ -24,12 +30,31 @@
             
             {% elif type == 'disciplines' %}
 
+                TOTAIS POR DISCIPLINA:<hr>
+  
                 {% for discipline_frequence in student[type] %}
 
                     {% for discipline, ausences in discipline_frequence.items() %}
 
                         {{ discipline }} : {{ ausences }}<hr>
 
+                    {% endfor %}
+                {% endfor %}
+            {% elif type == 'disciplines_periods' %}
+            
+                <p>TOTAIS POR TRIMESTRE: </p><hr>
+
+                {% for discipline, periods in student[type].items() %}
+
+                    <p>{{ discipline }}:</p><hr>
+
+                    {% for period, totals in periods.items() %}
+
+                        {% if period != 'Férias' %}
+
+                            {{ period }} : {{totals }}<hr>
+                        
+                        {% endif %}
                     {% endfor %}
                 {% endfor %}
             {% endif %}

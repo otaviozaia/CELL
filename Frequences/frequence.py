@@ -513,8 +513,4 @@ def insertQntClasess():
 
 
 
-@app.route('/return/periods')
-def returnPeriods():
-
-    return jsonify(return_frequences_for_periods('1701998'))
 
