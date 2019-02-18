@@ -257,3 +257,5 @@ def test_insert_qnt_classes(client):
 
 
 
+
+

@@ -22,7 +22,8 @@ from Frequences.functionsFrequence.frequenceDiscipline import*
 from Frequences.functionsFrequence.crud_periods import*
 #importa funções crud de quantidade de aulas por matéria
 from Frequences.functionsFrequence.crud_qnt_classes import*
-
+#import funções para porcentagem de frequencias
+from Frequences.functionsFrequence.percents import*
 
 
 
@@ -512,5 +513,11 @@ def insertQntClasess():
     return 'successfull' 
 
 
+#/percents?ra=1701998
+@app.route('/percents')
+def return_percents():
+
+    ra = request.args.get('ra')
 
 
+    return jsonify(return_percent_for_discipline(ra))
