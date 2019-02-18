@@ -186,7 +186,7 @@ def test_create_disciplines(client):
     res = client.post('/disciplines/create',json=json)
     assert res.status_code == 200
 
-'''
+
 
 
 #testando crud de periodos:
@@ -204,6 +204,56 @@ def test_insert_periods(client):
     res = client.post('/periods/insert',json=labels)
     assert res.status_code == 200
 
+'''
+
+
+
+#testando crud de quantidade de aulas por matéria e periodos:
+def test_insert_qnt_classes(client):
+
+    labels = [
+        {'name':'Matemática','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Matemática','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Matemática','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Matemática','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'História','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'História','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'História','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'História','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'Ciências','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Ciências','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Ciências','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Ciências','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'TEP','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'TEP','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'TEP','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'TEP','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'Língua Portuguesa','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Língua Portuguesa','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Língua Portuguesa','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Língua Portuguesa','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'Geografia','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Geografia','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Geografia','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Geografia','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'Língua Inglesa','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Língua Inglesa','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Língua Inglesa','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Língua Inglesa','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'Educação Física','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Educação Física','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Educação Física','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Educação Física','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'TEP Duplo Fixo','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'TEP Duplo Fixo','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'TEP Duplo Fixo','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'TEP Duplo Fixo','year':1,'period':'3ºTrimestre','qnt':30},
+        
+
+    ]
+
+    res = client.post('/periods/classes-insert',json=labels)
+    assert res.status_code == 200
 
 
 

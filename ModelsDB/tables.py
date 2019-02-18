@@ -1229,5 +1229,3 @@ class QuantidadeAulas(db.Model):
 
 
 
-
-

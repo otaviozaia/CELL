@@ -457,20 +457,64 @@ def insertPeriods():
 
 #--------------------------------------------------TOTAIS AULAS POR PERÍODOS-------------------------------------
 
-'''
-@app.route('periods/classes-insert',methods=['POST'])
+
+@app.route('/periods/classes-insert',methods=['POST'])
 def insertQntClasess():
 
     datas = request.get_json()
 
-    #json sample
-  
+    #sample json
+    '''
+    json = [
+        {'name':'Matemática','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Matemática','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Matemática','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Matemática','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'História','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'História','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'História','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'História','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'Ciências','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Ciências','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Ciências','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Ciências','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'TEP','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'TEP','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'TEP','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'TEP','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'Língua Portuguesa','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Língua Portuguesa','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Língua Portuguesa','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Língua Portuguesa','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'Geografia','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Geografia','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Geografia','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Geografia','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'Língua Inglesa','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Língua Inglesa','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Língua Inglesa','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Língua Inglesa','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'Educação Física','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'Educação Física','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'Educação Física','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'Educação Física','year':1,'period':'3ºTrimestre','qnt':30},
+        {'name':'TEP Duplo Fixo','year':1,'period':'1ºTrimestre','qnt':30},
+        {'name':'TEP Duplo Fixo','year':1,'period':'2ºTrimestre/1','qnt':30},
+        {'name':'TEP Duplo Fixo','year':1,'period':'2ºTrimestre/2','qnt':30},
+        {'name':'TEP Duplo Fixo','year':1,'period':'3ºTrimestre','qnt':30},
+        
 
-
-
-  
+    ]
+    ''' 
 
     insert_qnt_classes(datas)
 
     return 'successfull' 
-'''
+
+
+
+@app.route('/return/periods')
+def returnPeriods():
+
+    return jsonify(return_frequences_for_periods('1701998'))
+

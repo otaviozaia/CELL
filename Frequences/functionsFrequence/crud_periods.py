@@ -32,3 +32,24 @@ def insert_periods(datas):
     #salvamos as modificações e fechamos a conexão
     db.session.commit()      
 
+#RETORNA TODOS OS PERÍODOS:--------------------------------------------------------------------------------------
+
+def select_periods_all():
+    
+    periods = []
+    
+    query_periods = Periodos.query.all()
+
+    for period in query_periods:
+
+        atributes_period = {}
+
+        atributes_period['name_periodo'] = period.name_periodo
+        atributes_period['init'] = period.init
+        atributes_period['finish'] = period.finish
+
+        periods.append(atributes_period)
+
+
+    return periods
+

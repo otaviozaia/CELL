@@ -3,11 +3,12 @@
 
 
 from app import db
-from ModelsDB.tables import daily_frequence
+from ModelsDB.tables import daily_frequence, Ausences
 from flask_sqlalchemy import SQLAlchemy
 from Frequences.functionsFrequence.frequenceDiscipline import getDisciplinesAusences
 from Frequences.functionsFrequence.alunos import returnRa
-
+from Frequences.functionsFrequence.crud_periods import select_periods_all
+from Frequences.functionsFrequence.crud_disciplines import getDisciplinesGroup
 
 #RETORNA FREQUENCIAS DE UM DETERMINADO ALUNO BUSCANDO PELO RA
 def getFrequenceDaily_Student(ra):
@@ -89,5 +90,45 @@ def getFrequenceRa(ra):
         return None
 
 
-
+#RETORNA FREQUENCIAS POR PERÍODO PARA UM DETERMINADO ALUNO ESPECIFICANDO A MATÉRIA QUE SE DESEJA OBTER OS DADOS
+def return_frequences_for_periods(ra):
     
+    aluno = returnRa(ra)
+
+    year = aluno.year
+
+    dic_discipline = {}
+
+    disciplines = getDisciplinesGroup(year)
+
+    for disciplineDatas in disciplines:
+
+        discipline = disciplineDatas['name']
+
+        periods = select_periods_all()
+
+        dic_periods = {}
+
+        for period in periods:
+
+            cont = 0
+
+            period_name = period['name_periodo']
+            init = period['init']
+            finish = period['finish']
+
+            query_ausences = Ausences.query.filter_by(ra = ra, discipline = discipline).all()
+
+
+
+            for ausence in query_ausences:
+
+                if ausence.date >= init and ausence.date  <= finish:
+
+                    cont = cont+1
+
+            dic_periods[period_name] = cont
+
+        dic_discipline[discipline] = dic_periods
+
+    return dic_discipline
