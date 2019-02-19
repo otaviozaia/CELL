@@ -296,6 +296,8 @@ def getFrequenceByStudent():
     for ra in raS:
 
         frequences = getFrequenceRa(ra)
+        #capturando percentuais e inserindo dentro de frequences
+        frequences['percents'] = percent_for_discipline(ra)
 
         if frequences != None:
             frequencesStudy.append(frequences)
@@ -513,11 +515,7 @@ def insertQntClasess():
     return 'successfull' 
 
 
-#/percents?ra=1701998
-@app.route('/percents')
-def return_percents():
+@app.route('/test',methods=['GET'])
+def return_test():
 
-    ra = request.args.get('ra')
-
-
-    return jsonify(return_percent_for_discipline(ra))
+    return render_template('test_file.html')

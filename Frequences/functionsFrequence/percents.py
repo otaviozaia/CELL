@@ -4,7 +4,7 @@ from Frequences.functionsFrequence.alunos import returnRa
 from ModelsDB.tables import QuantidadeAulas
 
 #retornará as porcentagens de frequencia por matéria e período:
-def return_percent_for_discipline(ra):
+def percent_for_discipline(ra):
 
     result = {}
 
@@ -42,9 +42,12 @@ def return_percent_for_discipline(ra):
 
                 percent_a = str(percent_ausence)+'%'
 
-                dict_discipline_periods[period] = {'Porcentagem Frequência':percent_f,'Porcentagem Ausência':percent_a}
+                dict_discipline_periods[period] = {'Percentual Frequência':percent_f,'Percentual Ausência':percent_a}
 
         result[discipline] = dict_discipline_periods
 
 
     return result
+
+#return sample:
+#{"Ciências":{"1ºTrimestre":{"Porcentagem Ausência":"0.0%","Porcentagem Frequência":"100.0%"},"2ºTrimestre/1":{"Porcentagem Ausência":"0.0%","Porcentagem Frequência":"100.0%"}}}

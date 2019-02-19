@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jinja.css') }}" type="text/css"/>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/javascript.js') }}"></script>
 </head>
 <body>
     <!--ANALISAR EXEMPLO DE DICIONÁRIO RETORNADO EM Frequences.frequece.py rota /frequence-->
     {% for student in frequencesStudy %}
+    
         {% for type,frequences in student.items() %}
             {% if type == 'daily' %}
 
@@ -55,10 +58,37 @@
                             {{ period }} : {{totals }}<hr>
                         
                         {% endif %}
+                    
                     {% endfor %}
+                
                 {% endfor %}
+            
+            {% elif type == 'percents' %}
+
+                <p>PERCENTUAIS DE FREQUÊNCIA:</p><hr>
+
+                {% for discipline,periods in student[type].items() %}
+
+                    <p>{{ discipline }}:</p><hr>
+
+                    {% for period,ausences in periods.items() %}
+
+                        {{ period }}:
+
+                        {% for type_ausence, percent in ausences.items() %}
+
+                            {{ type_ausence }}:{{ percent }}
+
+                        {% endfor %}
+                        <hr>
+                    {% endfor %}
+
+                {% endfor %}
+
             {% endif %}
+        
         {% endfor %}
+    
     {% endfor %}
 </body>
 </html>

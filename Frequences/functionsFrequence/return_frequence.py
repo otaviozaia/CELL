@@ -10,6 +10,7 @@ from Frequences.functionsFrequence.alunos import returnRa
 from Frequences.functionsFrequence.crud_periods import select_periods_all
 from Frequences.functionsFrequence.crud_disciplines import getDisciplinesGroup
 
+
 #RETORNA FREQUENCIAS DE UM DETERMINADO ALUNO BUSCANDO PELO RA
 def getFrequenceDaily_Student(ra):
 
