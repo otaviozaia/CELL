@@ -514,8 +514,3 @@ def insertQntClasess():
 
     return 'successfull' 
 
-
-@app.route('/test',methods=['GET'])
-def return_test():
-
-    return render_template('test_file.html')

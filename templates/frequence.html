@@ -32,17 +32,26 @@
                 {% endfor %}
             
             {% elif type == 'disciplines' %}
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th> TOTAIS POR DISCIPLINA:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for discipline_frequence in student[type] %}
 
-                TOTAIS POR DISCIPLINA:<hr>
-  
-                {% for discipline_frequence in student[type] %}
-
-                    {% for discipline, ausences in discipline_frequence.items() %}
-
-                        {{ discipline }} : {{ ausences }}<hr>
+                        {% for discipline, ausences in discipline_frequence.items() %}
+                            <tr>
+                            <td>{{ discipline }}:</td> <td>{{ ausences }}</td>
+                            <tr>
+                        {% endfor %}
 
                     {% endfor %}
-                {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             {% elif type == 'disciplines_periods' %}
             
                 <p>TOTAIS POR TRIMESTRE: </p><hr>
