@@ -42,7 +42,7 @@ def percent_for_discipline(ra):
 
                 percent_a = str(percent_ausence)+'%'
 
-                dict_discipline_periods[period] = {'Percentual Frequência':percent_f,'Percentual Ausência':percent_a}
+                dict_discipline_periods[period] = {'Percentual Frequência':percent_f,'Percentual Ausência':percent_a,'Total Ausências':totals}
 
         result[discipline] = dict_discipline_periods
 

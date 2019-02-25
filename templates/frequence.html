@@ -42,48 +42,47 @@
                         {{ discipline }} : {{ ausences }}<hr>
 
                     {% endfor %}
+
                 {% endfor %}
-            {% elif type == 'disciplines_periods' %}
-            
-                <p>TOTAIS POR TRIMESTRE: </p><hr>
-
-                {% for discipline, periods in student[type].items() %}
-
-                    <p>{{ discipline }}:</p><hr>
-
-                    {% for period, totals in periods.items() %}
-
-                        {% if period != 'Férias' %}
-
-                            {{ period }} : {{totals }}<hr>
-                        
-                        {% endif %}
-                    
-                    {% endfor %}
-                
-                {% endfor %}
-            
             {% elif type == 'percents' %}
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>FREQUÊNCIAS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for discipline,periods in student[type].items() %}
+                            <tr>
+                                <td></td>
 
-                <p>PERCENTUAIS DE FREQUÊNCIA:</p><hr>
+                            {% for period,ausences in periods.items() %}
 
-                {% for discipline,periods in student[type].items() %}
+                                <td>{{ period }}:</td>
 
-                    <p>{{ discipline }}:</p><hr>
+                            </tr>
+                                <tr>
+                                    <td></td>
+                                {% for type_ausence, total in ausences.items() %}
+                                    
+                                    {% if type_ausence != 'Percentual Ausência' %}
 
-                    {% for period,ausences in periods.items() %}
+                                        <td>{{ type_ausence }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>{{ total }}</td>
+                                    </tr>
+                                    {% endif %}
 
-                        {{ period }}:
-
-                        {% for type_ausence, percent in ausences.items() %}
-
-                            {{ type_ausence }}:{{ percent }}
+                                {% endfor %}
+                            <hr>
+                            {% endfor %}
 
                         {% endfor %}
-                        <hr>
-                    {% endfor %}
-
-                {% endfor %}
+                        </tbody>
+                    </table>
 
             {% endif %}
         

@@ -89,7 +89,7 @@ def getFrequenceRa(ra):
         dadosDisciplinaPeriodo = return_frequences_for_periods(ra)
 
 
-        return {'daily':dados,'disciplines':dadosDisciplina,'disciplines_periods':dadosDisciplinaPeriodo}
+        return {'daily':dados,'disciplines':dadosDisciplina}
     
     else:
         return None
