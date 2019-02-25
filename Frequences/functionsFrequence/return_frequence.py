@@ -9,6 +9,68 @@ from Frequences.functionsFrequence.frequenceDiscipline import getDisciplinesAuse
 from Frequences.functionsFrequence.alunos import returnRa
 from Frequences.functionsFrequence.crud_periods import select_periods_all
 from Frequences.functionsFrequence.crud_disciplines import getDisciplinesGroup
+from datetime import date
+
+
+
+def getFrequenceDay_Student(ra):
+    
+    #armazenará lista com frequencias diárias de um aluno
+    dados = []
+
+    #trazendo frequencia do dia, de um determinado aluno
+    frequence = daily_frequence.query.filter_by(ra=ra,date=date.today()).first()
+
+    #formatando data
+    timeDate = frequence.date
+
+    dia = timeDate.day
+    mes = timeDate.month
+    ano = timeDate.year
+
+    formatDate = str(dia)+'/'+str(mes)+'/'+str(ano)
+
+    #nomeando dia da semana
+    if frequence.weekday == 2:
+        weekDay = 'Segunda-feira'
+    elif frequence.weekday == 3:
+        weekDay = 'Terça-feira'
+    elif frequence.weekday == 4:
+        weekDay = 'Quarta-feira'
+    elif frequence.weekday == 5:
+        weekDay = 'Quinta-feira'
+    elif frequence.weekday == 6:
+        weekDay = 'Sexta-feira'
+    elif frequence.weekday == 7:
+        weekDay = 'Sábado'
+    elif frequence.weekday == 1:
+        weekDay = 'Domingo'
+
+    #formando json a ser retornado pela função
+    dados.append({'ra':frequence.ra,
+                    'name':frequence.name,
+                    'date':formatDate,
+                    'weekday':weekDay,
+                    'entrada':frequence.entrada,
+                    'saida':frequence.saida,
+                    'p1':int(frequence.p1),
+                    'p2':int(frequence.p2),
+                    'p3':int(frequence.p3),
+                    'p4':int(frequence.p4),
+                    'p5':int(frequence.p5),
+                    'p6':int(frequence.p6),
+                    'p7':int(frequence.p7),
+                    'p8':int(frequence.p8),
+                    'p9':int(frequence.p9),
+                    'p10':int(frequence.p10),
+                    'total':frequence.total})
+
+    return dados
+
+
+
+
+
 
 
 #RETORNA FREQUENCIAS DE UM DETERMINADO ALUNO BUSCANDO PELO RA
@@ -79,7 +141,7 @@ def getFrequenceRa(ra):
         year = aluno.year
 
         #retorna frequencias diárias
-        dados = getFrequenceDaily_Student(ra)
+        dados = getFrequenceDay_Student(ra)
 
         #retorna total de frequencias no ano por disciplina
         dadosDisciplina = getDisciplinesAusences(ra,year)
