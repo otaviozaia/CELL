@@ -30,36 +30,6 @@
 
                                 <tr class="row">
 
-<<<<<<< HEAD
-                    {% endfor %}
-                
-                {% endfor %}
-            
-            {% elif type == 'disciplines' %}
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th> TOTAIS POR DISCIPLINA:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for discipline_frequence in student[type] %}
-
-                        {% for discipline, ausences in discipline_frequence.items() %}
-                            <tr>
-                            <td>{{ discipline }}:</td> <td>{{ ausences }}</td>
-                            <tr>
-                        {% endfor %}
-
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            {% elif type == 'disciplines_periods' %}
-            
-                <p>TOTAIS POR TRIMESTRE: </p><hr>
-=======
                                     <th class="col-12">Última Frequência</th>
 
                                 </tr>
@@ -71,7 +41,6 @@
                                 <tr class="row">
 
                                     <th class="col-12">{{ frequence_daily['weekday'] }} - {{ frequence_daily['date'] }}</th>
->>>>>>> thirty
 
                                 </tr>
 
