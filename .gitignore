@@ -1,1 +1,6 @@
 /venv
+/Ocurrences/credentials.json
+/Ocurrences/token.json
+/Ocurrences/token2.json
+/Ocurrences/token3.json
+/credenciais.py
