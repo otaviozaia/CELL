@@ -5,28 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/jinja.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jinjaa.css') }}" type="text/css"/>
     <script type="text/javascript" src="{{ url_for('static', filename='js/javascript.js') }}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="body_image">
+        {% extends "base.html" %}
+
+        {% block base %} 
     <!--ANALISAR EXEMPLO DE DICIONÁRIO RETORNADO EM Frequences.frequece.py rota /frequence-->
     {% for student in frequencesStudy %}
-    
+        
         {% for type,frequences in student.items() %}
             {% if type == 'daily' %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <table class="table">
 
-                <p>FREQUÊNCIAS DIÁRIAS:</p><hr>
+                            <thead class="thead-dark">
 
-                {% for frequence_daily in student[type] %}
+                                <tr class="row">
 
-                    {% for key,value in frequence_daily.items() %}
-
-                        {% if key != '_id' %}
-
-                            {{ key }} : {{ value }}<hr>
-                        
-                        {% endif %}
-
+<<<<<<< HEAD
                     {% endfor %}
                 
                 {% endfor %}
@@ -55,49 +59,210 @@
             {% elif type == 'disciplines_periods' %}
             
                 <p>TOTAIS POR TRIMESTRE: </p><hr>
+=======
+                                    <th class="col-12">Última Frequência</th>
 
-                {% for discipline, periods in student[type].items() %}
+                                </tr>
 
-                    <p>{{ discipline }}:</p><hr>
+                            </thead>
+                            {% for frequence_daily in student[type] %}
+                            <thead class="thead-light">
 
-                    {% for period, totals in periods.items() %}
+                                <tr class="row">
 
-                        {% if period != 'Férias' %}
+                                    <th class="col-12">{{ frequence_daily['weekday'] }} - {{ frequence_daily['date'] }}</th>
+>>>>>>> thirty
 
-                            {{ period }} : {{totals }}<hr>
-                        
-                        {% endif %}
-                    
-                    {% endfor %}
-                
-                {% endfor %}
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr class="row">
+
+                                    <td class="col-6">Entrada:</td>
+                                    <td class="col-6">{{ frequence_daily['entrada'] }}</td>
+
+                                </tr>   
+                                <tr class="row">
+
+                                    <td class="col-6">Saída:</td>
+                                    <td class="col-6">{{ frequence_daily['saida'] }}</td>
             
+                                </tr> 
+                            </tbody>
+                            <thead class="thead-light">
+                                
+                                <tr class="row">
+
+                                        <th class="col-8">Ausências</th>
+                                        <th class="col-4">Horário/Aulas</th>
+                
+                                </tr> 
+
+                            </thead>
+                            <tbody>
+
+                                <tr class="row">
+
+                                        <td class="col-4">Aula 01</td>
+                                        <td class="col-4">{{ frequence_daily['p1'] }}</td>
+                                        <td class="col-4">HH:MI - HH:MI</td>                                
+
+                                </tr> 
+                                <tr class="row">
+
+                                        <td class="col-4">Aula 02</td>
+                                        <td class="col-4">{{ frequence_daily['p2'] }}</td>
+                                        <td class="col-4">HH:MI - HH:MI</td>                                
+                                        
+                                </tr> 
+                                <tr class="row">
+
+                                        <td class="col-4">Aula 03</td>
+                                        <td class="col-4">{{ frequence_daily['p3'] }}</td>
+                                        <td class="col-4">HH:MI - HH:MI</td>                                
+                                        
+                                </tr> 
+                                <tr class="row">
+
+                                        <td class="col-4">Aula 04</td>
+                                        <td class="col-4">{{ frequence_daily['p4'] }}</td>
+                                        <td class="col-4">HH:MI - HH:MI</td>                                
+                                        
+                                </tr> 
+                                <tr class="row">
+
+                                        <td class="col-4">Aula 05</td>
+                                        <td class="col-4">{{ frequence_daily['p5'] }}</td>
+                                        <td class="col-4">HH:MI - HH:MI</td>                                
+                                        
+                                </tr> 
+                                <tr class="row">
+
+                                        <td class="col-4">Aula 06</td>
+                                        <td class="col-4">{{ frequence_daily['p6'] }}</td>
+                                        <td class="col-4">HH:MI - HH:MI</td>                                
+                                        
+                                </tr> 
+                                <tr class="row">
+
+                                        <td class="col-4">Aula 07</td>
+                                        <td class="col-4">{{ frequence_daily['p7'] }}</td>
+                                        <td class="col-4">HH:MI - HH:MI</td>                                
+                                        
+                                </tr> 
+                                <tr class="row">
+
+                                        <td class="col-4">Aula 08</td>
+                                        <td class="col-4">{{ frequence_daily['p8'] }}</td>
+                                        <td class="col-4">HH:MI - HH:MI</td>                                
+                                        
+                                </tr> 
+                                <tr class="row">
+
+                                        <td class="col-4">Aula 09</td>
+                                        <td class="col-4">{{ frequence_daily['p9'] }}</td>
+                                        <td class="col-4">HH:MI - HH:MI</td>                                
+                                        
+                                </tr> 
+                                <tr class="row">
+
+                                        <td class="col-4">Aula 10</td>
+                                        <td class="col-4">{{ frequence_daily['p10'] }}</td>
+                                        <td class="col-4">HH:MI - HH:MI</td>                                
+                                        
+                                </tr> 
+                                <thead class="thead-light">
+
+                                    <tr class="row">
+
+                                        <th class="col-4"><strong>TOTAL</strong></th>
+                                        <th class="col-4"><strong>{{ frequence_daily['total'] }}</strong></th>  
+                                        <th class="col-4"></th>
+
+                                    </tr>
+                                        
+                                </thead> 
+
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br><br><br><br><br><br><br><br>
             {% elif type == 'percents' %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr class="row">
+                                    <th class="col-12">Frequencias</th>
+                                </tr>
+                            </thead>
+                            <thead class="thead-light">
+                                <tr class="row">
+                                    <th class="col-2"></th>
+                                    <th class="col-2">1º Tri</th>
+                                    <th class="col-2">2º Tri/1</th>
+                                    <th class="col-2">2º Tri/2</th>
+                                    <th class="col-2">3º Tri</th>
+                                    <th class="col-2">Anual</th>
+                                </tr>
+                            </thead>
+                            <thead class="thead-dark">
+                                <tr class="row">
 
-                <p>PERCENTUAIS DE FREQUÊNCIA:</p><hr>
+                                    <th class="col-2">Disciplina</th>
+                                    <th class="col-1">Freq.%</th>
+                                    <th class="col-1">Faltas</th>
+                                    <th class="col-1">Freq.%</th>
+                                    <th class="col-1">Faltas</th>
+                                    <th class="col-1">Freq.%</th>
+                                    <th class="col-1">Faltas</th>
+                                    <th class="col-1">Freq.%</th>
+                                    <th class="col-1">Faltas</th>
+                                    <th class="col-1">Freq.%</th>
+                                    <th class="col-1">Faltas</th>
+                                    
 
-                {% for discipline,periods in student[type].items() %}
 
-                    <p>{{ discipline }}:</p><hr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for discipline,periods in student[type].items() %}
+                                <tr class="row">
+                                <td class="col-2">{{ discipline }}</td>
+                                {% for period,ausences in periods.items() %}
 
-                    {% for period,ausences in periods.items() %}
+                                
+                                    
+                                    {% for type_ausence, total in ausences.items() %}
 
-                        {{ period }}:
+                                        {% if type_ausence != 'Percentual Ausência' %}
 
-                        {% for type_ausence, percent in ausences.items() %}
+                                            <td class="col-1">{{ total }}</td>
 
-                            {{ type_ausence }}:{{ percent }}
+                                        {% endif %}
 
-                        {% endfor %}
-                        <hr>
-                    {% endfor %}
+                                    {% endfor %}
 
-                {% endfor %}
+                                {% endfor %}
 
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br><br><hr><br><br><br><br><br>
             {% endif %}
-        
+                
         {% endfor %}
     
     {% endfor %}
+
 </body>
 </html>

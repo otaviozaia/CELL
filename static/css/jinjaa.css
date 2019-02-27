@@ -1,0 +1,12 @@
+.body_color {
+    background-color: #8189ca;
+    background-size:cover;
+    margin: 0;   	   
+  }
+
+.body_image {
+
+    background-image: './images/vereda-1533073165-cut-bg-chromebooks-vereda-3jpg.jpg';
+    background-size:cover;
+    margin: 0;  
+}

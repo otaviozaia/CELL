@@ -514,3 +514,11 @@ def insertQntClasess():
 
     return 'successfull' 
 
+<<<<<<< HEAD
+=======
+
+@app.route('/test',methods=['GET'])
+def return_test():
+
+    return render_template('test-nav.html')
+>>>>>>> thirty
