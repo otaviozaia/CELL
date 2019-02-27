@@ -518,4 +518,4 @@ def insertQntClasess():
 @app.route('/test',methods=['GET'])
 def return_test():
 
-    return render_template('test_file.html')
+    return render_template('test-nav.html')

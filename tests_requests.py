@@ -204,7 +204,7 @@ def test_insert_periods(client):
     res = client.post('/periods/insert',json=labels)
     assert res.status_code == 200
 
-'''
+
 
 
 
@@ -254,7 +254,27 @@ def test_insert_qnt_classes(client):
 
     res = client.post('/periods/classes-insert',json=labels)
     assert res.status_code == 200
+'''
 
+
+#testando crud de quantidade de aulas por matéria e periodos:
+def test_insert_qnt_classes(client):
+
+    labels = [
+        {'name':'Matemática','year':1,'period':'Ano','qnt':100},
+        {'name':'História','year':1,'period':'Ano','qnt':100},
+        {'name':'Ciências','year':1,'period':'Ano','qnt':100},
+        {'name':'TEP','year':1,'period':'Ano','qnt':100},
+        {'name':'Língua Portuguesa','year':1,'period':'Ano','qnt':100},
+        {'name':'Geografia','year':1,'period':'Ano','qnt':100},
+        {'name':'Língua Inglesa','year':1,'period':'Ano','qnt':100},
+        {'name':'Educação Física','year':1,'period':'Ano','qnt':100},
+        {'name':'TEP Duplo Fixo','year':1,'period':'Ano','qnt':100},
+
+    ]
+
+    res = client.post('/periods/classes-insert',json=labels)
+    assert res.status_code == 200
 
 
 

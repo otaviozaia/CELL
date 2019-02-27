@@ -13,6 +13,9 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body class="body_image">
+        {% extends "base.html" %}
+
+        {% block base %} 
     <!--ANALISAR EXEMPLO DE DICIONÁRIO RETORNADO EM Frequences.frequece.py rota /frequence-->
     {% for student in frequencesStudy %}
         
@@ -142,9 +145,10 @@
 
                                     <tr class="row">
 
-                                        <th class="col-6"><strong>TOTAL</strong></th>
-                                        <th class="col-6"><strong>{{ frequence_daily['total'] }}</strong></th>  
-                                        
+                                        <th class="col-4"><strong>TOTAL</strong></th>
+                                        <th class="col-4"><strong>{{ frequence_daily['total'] }}</strong></th>  
+                                        <th class="col-4"></th>
+
                                     </tr>
                                         
                                 </thead> 
@@ -214,8 +218,7 @@
                                     {% endfor %}
 
                                 {% endfor %}
-                                <td class="col-1">Undefined</td>
-                                <td class="col-1">Undefined</td>
+
                                 </tr>
                             {% endfor %}
                             </tbody>
