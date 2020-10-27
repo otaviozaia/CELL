@@ -11,7 +11,7 @@ cffi==1.11.5
 chardet==3.0.4
 Click==7.0
 colorama==0.4.1
-cryptography==2.3.1
+cryptography==3.2
 d2lvalence==1.2.2
 D2LValence-Util==0.1.16
 Django==2.0.3
