@@ -14,7 +14,7 @@ colorama==0.4.1
 cryptography==2.3.1
 d2lvalence==1.2.2
 D2LValence-Util==0.1.16
-Django==2.0.3
+Django==2.2.24
 Flask==1.0.2
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
